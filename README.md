@@ -15,8 +15,6 @@ Este projeto é um dashboard interativo para visualização de métricas essenci
 2.  **Taxa de Retenção**: Percentual de clientes que permaneceram ativos.
 3.  **NPS (Net Promoter Score)**: Indicador de lealdade e satisfação do cliente.
 
-## 💻 Como rodar o projeto
 
-1. Clone o repositório:
-   ```bash
-   git clone [https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git](https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git)
+
+
