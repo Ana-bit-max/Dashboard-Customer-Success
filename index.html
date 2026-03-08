@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard CS - Métricas SaaS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-slate-800 text-white p-6 shadow-md">
+            <h1 class="text-2xl font-bold uppercase tracking-wider">Dashboard Customer Success</h1>
+            <p class="text-sm text-slate-400">Simulação de Métricas SaaS - Março 2026</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="p-6 flex-grow">
+            
+            <!-- Cards de Métricas -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-red-500">
+                    <h3 class="text-gray-500 text-sm font-semibold uppercase">Churn Rate</h3>
+                    <p class="text-3xl font-bold text-gray-800">3.2%</p>
+                    <span class="text-red-500 text-sm">↑ 0.4% vs mês anterior</span>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-green-500">
+                    <h3 class="text-gray-500 text-sm font-semibold uppercase">Taxa de Retenção</h3>
+                    <p class="text-3xl font-bold text-gray-800">96.8%</p>
+                    <span class="text-green-500 text-sm">Estável</span>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                    <h3 class="text-gray-500 text-sm font-semibold uppercase">NPS (Net Promoter Score)</h3>
+                    <p class="text-3xl font-bold text-gray-800">72</p>
+                    <span class="text-blue-500 text-sm">Zona de Qualidade</span>
+                </div>
+            </div>
+
+            <!-- Gráficos -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Gráfico de Linha -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-lg font-bold mb-4 text-gray-700">Retenção vs Churn (Semestre)</h2>
+                    <canvas id="retentionChart"></canvas>
+                </div>
+
+                <!-- Gráfico de Pizza/NPS -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h2 class="text-lg font-bold mb-4 text-gray-700">Distribuição de Clientes (NPS)</h2>
+                    <div class="max-w-[300px] mx-auto">
+                        <canvas id="npsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configuração do Gráfico de Retenção e Churn
+        const ctxLine = document.getElementById('retentionChart').getContext('2d');
+        new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: ['Out', 'Nov', 'Dez', 'Jan', 'Fev', 'Mar'],
+                datasets: [{
+                    label: 'Taxa de Retenção (%)',
+                    data: [95, 94.5, 96, 97, 96.5, 96.8],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }, {
+                    label: 'Churn Rate (%)',
+                    data: [5, 5.5, 4, 3, 3.5, 3.2],
+                    borderColor: '#ef4444',
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // Configuração do Gráfico de NPS
+        const ctxPie = document.getElementById('npsChart').getContext('2d');
+        new Chart(ctxPie, {
+            type: 'doughnut',
+            data: {
+                labels: ['Promotores', 'Passivos', 'Detratores'],
+                datasets: [{
+                    data: [65, 20, 15],
+                    backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+    </script>
+</body>
+</html>
